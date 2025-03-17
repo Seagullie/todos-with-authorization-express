@@ -1,14 +1,14 @@
 import {
     Router
 } from "express";
+import TaskController from "../Controllers/TasksController";
 
-const router = Router();
+const tasksRouter = Router();
 
 
-router.get("/api/tasks/:listId", authController.signup_get);
-router.post('/api/tasks', authController.signup_post);
-router.put('/api/tasks/:id', authController.login_get);
+tasksRouter.get("/api/tasks/:listId", TaskController.getTasks);
+tasksRouter.post('/api/tasks', TaskController.createTask);
+tasksRouter.put('/api/tasks/:id', TaskController.updateTask);
+tasksRouter.delete('/api/tasks/:id', TaskController.deleteTask);
 
-router.delete('/api/tasks/:id', authController.login_post);
-
-export default router
+export default tasksRouter
