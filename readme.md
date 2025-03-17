@@ -7,3 +7,7 @@ Features overview:
 3. TODOs Lists CRUD ✔
 4. Authentication ❌
 5. Roles ❌
+
+Link to frontend:
+
+https://github.com/Seagullie/todos-with-authorization
