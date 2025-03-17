@@ -1,13 +1,17 @@
 import { Request, Response } from "express";
 import Task from "../Models/Task";
+import { v4 as uuidv4 } from "uuid";
 
 class TaskController {
   static async createTask(req: Request, res: Response) {
     try {
+      // for debugging purposes
+      await Task.collection.dropIndexes();
+
       console.log("createTask req.body:");
       console.log(req.body);
 
-      const task = new Task(req.body);
+      const task = new Task({ ...req.body });
       await task.save();
       res.json(task);
     } catch (error) {
@@ -59,6 +63,18 @@ class TaskController {
     } catch (error) {
       res.status(500).json({
         error: "Failed to delete task",
+      });
+    }
+  }
+
+  static async dropAllIndexes(req: Request, res: Response) {
+    try {
+      await Task.collection.dropIndexes();
+      res.json({ message: "All indexes dropped" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: "Failed to drop indexes",
       });
     }
   }
